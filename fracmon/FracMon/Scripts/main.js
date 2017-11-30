@@ -15,7 +15,7 @@ function showWells() {
     .find('option')
     .remove()
     .end()
-    .append('<option value="-1">Select A Well Motaz</option>');
+    .append('<option value="-1">Select A Well</option>');
     //.val('whatever')
 
     for (var i = 0; i < wellsList.length; i++) {
