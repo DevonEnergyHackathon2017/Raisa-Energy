@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Content/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="Content/site.css" />
+    <script src="Scripts/jquery-2.2.4.min.js"></script>
+    <script src="Scripts/jquery.mobile-1.4.5.min.js"></script>
+    <script src="Scripts/communication.js"></script>
+    <script src="Scripts/main.js"></script>
+    <script src="Scripts/tabs.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+    <div id="wellsListContainer" class="ui-field-contain">
+        <label for="wellsList">Wells</label>
+        <select name="wellsList" id="wellsList" onchange="wellSelected()">
+
+        </select>
+    </div>
+
+    <ul class="tabs">
+        <li><a href="#tab1">Podcasts</a></li>
+        <li><a href="#tab2">Videos</a></li>
+    </ul>
+    <div id="tab1" class="tab_content">
+        <p>test</p>
+    </div>
+
+    <div class="tab_content" id="stageTabContainer">
+        <ul class="tabs">
+            <li><a href="#stage1">Stage 1</a></li>
+            <!-- Add tabs here -->
+            <!--
+            <li><a href="#tab2-2">Tab2-2</a></li>
+                -->
+        </ul>
+        
+        <div id="stage1">
+            <div id="stageChart1" style="height: 370px; width:100%;"></div>
+        </div>
+        <!--
+        <div id="tab2-2">
+            <p>test 2</p>
+        </div>
+            -->
+    </div>
+
+    <!--
+    <div data-role="tabs" id="tabs">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#one" data-ajax="false">Well Info</a></li>
+                <li><a href="#two" data-ajax="false">Drilling Tracker</a></li>
+                <li><a href="#three" data-ajax="false">Tracking Goals</a></li>
+            </ul>
+        </div>
+
+        <div id="one" class="ui-body-d ui-content">
+            <h1>First tab contents</h1>
+        </div>
+        <div id="two">
+            
+            <div data-role="navbar">
+                <ul id="chartTabs">
+                    <li><a href="#stage1" data-ajax="false">Stage 1</a></li>
+                    <li><a href="#stage2" data-ajax="false">Stage 2</a></li>
+                </ul>
+            </div>
+
+            <div id="stage1" class="ui-body-d ui-content">
+                <div id="chartContainer1" style="height: 370px; width:100%;"></div>
+            </div>
+
+            <div id="stage2" class="ui-body-d ui-content">
+                <div id="chartContainer2" style="height: 370px; width:100%;"></div>
+            </div>
+        </div>
+
+        <div id="three">
+        </div>
+    </div>
+    -->
+
+    <script>
+        /*
+        jQuery('ul.tabs').each(function () {
+            // For each set of tabs, we want to keep track of
+            // which tab is active and it's associated content
+            var $active, $content, $links = jQuery(this).find('a');
+
+            // If the location.hash matches one of the links, use that as the active tab.
+            // If no match is found, use the first link as the initial active tab.
+            $active = jQuery($links.filter('[href="' + location.hash + '"]')[0] || $links[0]);
+            $active.addClass('active');
+
+            $content = $($active[0].hash);
+
+            // Hide the remaining content
+            $links.not($active).each(function () {
+                jQuery(this.hash).hide();
+            });
+
+            // Bind the click event handler
+            jQuery(this).on('click', 'a', function (e) {
+                // Make the old tab inactive.
+                $active.removeClass('active');
+                $content.hide();
+
+                // Update the variables with the new link and content
+                $active = jQuery(this);
+                $content = jQuery(this.hash);
+
+                // Make the tab active.
+                $active.addClass('active');
+                $content.show();
+
+                // Prevent the anchor's default click action
+                e.preventDefault();
+            });
+        });
+        */
+        loadTabs();
+        loadWellsList();
+        //addStageChartTab(1);
+        //addStageChartTab(2);
+        //addStageChartTab(3);
+    </script>
+</body>
+</html>

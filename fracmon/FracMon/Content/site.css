@@ -1,0 +1,4 @@
+﻿.tab_content { background:#fff;padding:10px;width:100% }
+.tabs li { display:inline;list-style:none }
+.tabs a { background:#7c7c7c;color:#dadada;display:inline-block }
+.tabs a.active { background:#e32d2d;color:#fff }
