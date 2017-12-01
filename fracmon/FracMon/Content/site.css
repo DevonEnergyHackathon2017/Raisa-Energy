@@ -1,0 +1,80 @@
+﻿.tab_content {
+    background: #fff;
+    padding-left: 50px;
+    padding-right: 10px;
+    width: 100%;
+}
+
+.tabs li {
+    display: inline;
+    list-style: none;
+}
+
+.ui-link {
+}
+
+.danger {
+    background-color: red;
+}
+
+.cool {
+    background-color: green;
+}
+
+div.card {
+    width: 150px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+    margin: 0px;
+}
+
+div.header {
+    color: white;
+    padding: 0px;
+    font-size: 40px;
+    margin: 0px;
+}
+
+div.container {
+    padding: 0px;
+    margin: 0px;
+}
+
+.tabs a {
+    /*
+    background: #7c7c7c;
+    color: #dadada;
+    display: inline-block;
+    text-decoration: none;
+        */
+}
+
+    .tabs a.active {
+        /*
+        background: #e32d2d;
+        color: #fff;
+            */
+    }
+
+
+div {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.overlay {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 60px; /* chartArea top  */
+    left: 180px; /* chartArea left */
+}
+
+.notVisible {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
