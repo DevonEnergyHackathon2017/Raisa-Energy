@@ -7,7 +7,7 @@ var topChartData = [];
 var currentBottomChart = null;
 var currentBottomChartOptions = null;
 var bottomChartData = [];
-var updateInterval = 1000;
+var updateInterval = 200;
 
 var currentTopPerfChart = null;
 var currentTopPerfChartOptions = null;
@@ -254,25 +254,22 @@ function updateBottomPerfChart(point, wellPoint) {
 
 function createCostChart(stageNumber) {
     costChartData[stageNumber] = new google.visualization.DataTable();
+    costChartData[stageNumber].addColumn('number', 'Minutes');
     costChartData[stageNumber].addColumn('number', 'Cost');
-    costChartData[currentStage].addRow([0]);
 
     currentCostChartOptions = {
         chart: {
             //title: 'Stage ' +stageNumber
         },
         width: '300px',
-        height: '300px',
-        greenFrom: 0, greenTo: 50,
-        redFrom: 75, redTo: 100,
-        yellowFrom: 50, yellowTo: 75,
-        minorTicks: 5
+        height: '300px'
     };
 
-    currentCostChart = new google.visualization.Gauge(document.getElementById("costStage" + stageNumber));
+    currentCostChart = new google.visualization.ColumnChart(document.getElementById("costStage" + stageNumber));
 }
 
 function updateCostChart(point, wellPoint) {
-    costChartData[currentStage].setValue(0, 0, Math.round(100 * Math.random()));
+    var cost = calculateCost(wellPoint, currentStage)
+    costChartData[currentStage].addRow([wellPoint.TimeInMinute, cost]);
     currentCostChart.draw(costChartData[currentStage], currentCostChartOptions);
 }

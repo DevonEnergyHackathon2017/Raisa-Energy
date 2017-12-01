@@ -72,8 +72,18 @@ function addStageChartTab(stageNumber) {
 
     stageName = "perfStage" + stageNumber;
     chartName = "perfStageChart" + stageNumber;
+    var costChartName = "costStage" + stageNumber;
     tabLink = '<li><a id="' + stageName + 'Tab" href="#' + stageName + '" class="btn btn-primary">Stage ' + stageNumber + '</a></li>';
-    tabContent = '<div id="' + stageName + '" style="width:620px;"><div id="' + chartName + 'Top" style="height: 300px; width:600px;"></div><div id="' + chartName + 'Bottom" style="height: 300px; width:600px;"></div></div>';
+
+    tabContent = `<table>
+                <tr>
+                    <td rowspan="2"><div id="${costChartName}" style="height: 300px; width:600px;"/></td>
+                    <td><div id="${chartName}Top" style="height: 300px; width:600px;"></div></td>
+                </tr>
+                <tr><td><div id="${chartName}Bottom" style="height: 300px; width:600px;"></div></td></tr>
+            </table>`;
+
+    //tabContent = '<div id="' + stageName + '" style="width:620px;"><div id="' + chartName + 'Top" style="height: 300px; width:600px;"></div><div id="' + chartName + 'Bottom" style="height: 300px; width:600px;"></div></div>';
     $(tabLink).appendTo(ul);
     $(tabContent).appendTo(tabs);
     tabs.tabs("refresh");
@@ -93,4 +103,6 @@ function markStageDone(stageNumber) {
     stageTab = $("#" + stageName);
     stageTab.removeClass("btn-primary");
     stageTab.addClass("btn-success");
+
+    resetScenarioVariables();
 }
