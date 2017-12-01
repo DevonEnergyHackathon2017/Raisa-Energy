@@ -314,6 +314,10 @@
     <Content Include="default.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="images\DevonLogo.jpg" />
+    <Content Include="images\FracTrac Logo.png" />
+    <Content Include="images\FracTracLogo.jpg" />
+    <Content Include="images\stages.jpg" />
     <Content Include="Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>

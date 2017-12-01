@@ -11,6 +11,7 @@ var clayCost = 63.10, sufactantCost = 82.89, frCost = 68.27;
 var clayProjected = 0, probProjected = 0, bioActual = 0, bioProjected = 0;
 var surfActual = 0, surfProjected = 0, frActual = 0, frProjected = 0, probCost = .1, biocideCost = 100.57;
 var pvPerStage = 50000;
+var faultDepth = 18400;
 
 var currentScenario = {
     SlurryRate: [16.2, 38, 38, 38, 38, 38, 38, 38],
@@ -120,4 +121,16 @@ function calculateCost(wellDataPoint, stageNumber) {
     var variance = chemicalDifference + additionalLaborCost;
 
     return pvPerStage - variance;
+}
+
+function setAlert(parent, item, text, danger) {
+    if (danger) {
+        $("#" + parent).css("background", "red");
+    } else
+        $("#" + parent).css("background", "green");
+    $("#" + item).text(text);
+
+    $("#" + parent).parent().css("display", "block");
+    $("#" + parent).css("display", "block");
+    //$("#" + item).addClass(className);
 }

@@ -171,12 +171,57 @@ function updateChartFromServer() {
             updatePhase(currentWellPoint);
         }
 
-
         updateTopChart(currentPoint, currentWellPoint);
         updateBottomChart(currentPoint, currentWellPoint);
         updateTopPerfChart(currentPoint, currentWellPoint);
         updateBottomPerfChart(currentPoint, currentWellPoint);
         updateCostChart(currentPoint, currentWellPoint);
+
+        if (currentWellPoint.Pressure >= (currentScenario.Pressure[currentPhase] * 0.9))
+            setAlert("PressureDiv", "PressureNumber", currentWellPoint.Pressure, true);
+        else
+            setAlert("PressureDiv", "PressureNumber", currentWellPoint.Pressure, false);
+
+        if ( (currentWellPoint.SlurryRate > (currentScenario.SlurryRate[currentPhase] * 1.15)) ||
+            (currentWellPoint.SlurryRate <= (currentScenario.SlurryRate[currentPhase] * 0.85))
+            )
+            setAlert("SlurryDiv", "SlurryNumber", currentWellPoint.SlurryRate, true);
+        else
+            setAlert("SlurryDiv", "SlurryNumber", currentWellPoint.SlurryRate, false);
+
+        if ((currentWellPoint.PropConcentration > (currentScenario.PropConcentration[currentPhase] * 1.15)) ||
+            (currentWellPoint.PropConcentration <= (currentScenario.PropConcentration[currentPhase] * 0.85))
+            )
+            setAlert("ProbConcDiv", "ProbConcNumber", currentWellPoint.PropConcentration, true);
+        else
+            setAlert("ProbConcDiv", "ProbConcNumber", currentWellPoint.PropConcentration, false);
+
+        if ((currentWellPoint.FrictionReducer > (currentScenario.FrictionReducer[currentPhase] * 1.15)) ||
+            (currentWellPoint.FrictionReducer <= (currentScenario.FrictionReducer[currentPhase] * 0.85))
+            )
+            setAlert("FrictionReducerDiv", "FrictionReducerNumber", currentWellPoint.FrictionReducer, true);
+        else
+            setAlert("FrictionReducerDiv", "FrictionReducerNumber", currentWellPoint.FrictionReducer, false);
+
+        if ((currentWellPoint.ClayStay > (currentScenario.ClayStay[currentPhase] * 1.15)) ||
+            (currentWellPoint.ClayStay <= (currentScenario.ClayStay[currentPhase] * 0.85))
+            )
+            setAlert("ClayStayDiv", "ClayStayNumber", currentWellPoint.ClayStay, true);
+        else
+            setAlert("ClayStayDiv", "ClayStayNumber", currentWellPoint.ClayStay, false);
+
+        if ((stagesList[currentStage-1].MaxDepth > faultDepth) && (stagesList[currentStage-1].MinDepth < faultDepth))
+            setAlert("GeoDiv", "GeoNumber", "Formation Warning", true);
+        else
+            setAlert("GeoDiv", "GeoNumber", "Formation Good", false);
+
+        var cost = calculateCost(currentWellPoint, currentStage)
+        cost = new Number(cost);
+        if (cost > 0)
+            setAlert("CostDiv", "CostNumber", "$" +cost.toFixed(0), false);
+        else
+            setAlert("CostDiv", "CostNumber", "$" + cost.toFixed(0), true);
+
     }
 };
 
@@ -188,7 +233,7 @@ function createTopPerformanceChart(stageNumber) {
 
     currentTopPerfChartOptions = {
         chart: {
-            //title: 'Stage ' +stageNumber
+            title: '% Deviation Plots [Actual Vs Design]'
         },
         width: '90%',
         height: '300px',
@@ -255,11 +300,11 @@ function updateBottomPerfChart(point, wellPoint) {
 function createCostChart(stageNumber) {
     costChartData[stageNumber] = new google.visualization.DataTable();
     costChartData[stageNumber].addColumn('number', 'Minutes');
-    costChartData[stageNumber].addColumn('number', 'Cost');
+    costChartData[stageNumber].addColumn('number', 'Stage Value');
 
     currentCostChartOptions = {
         chart: {
-            //title: 'Stage ' +stageNumber
+            title: 'Stage Value'
         },
         width: '300px',
         height: '300px'
