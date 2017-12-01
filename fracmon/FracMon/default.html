@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Content/bootstrap.min.css" />
+    <!--
+    <link rel="stylesheet" href="Content/jquery.mobile-1.4.5.min.css" />
+        -->
+    <link rel="stylesheet" href="Content/site.css" />
+    <script src="Scripts/jquery-2.2.4.min.js"></script>
+    <script>
+        $(document).on("mobileinit", function () {
+            $.mobile.keepNative = "select";
+        });
+    </script>
+    <script src="Scripts/jquery.mobile-1.4.5.min.js"></script>
+    <script src="Scripts/communication.js"></script>
+    <script src="Scripts/overlays.js"></script>
+    <script src="Scripts/scenarios.js"></script>
+    <script src="Scripts/chart.js"></script>
+    <script src="Scripts/main.js"></script>
+    <script src="Scripts/tabs.js"></script>
+    <!--<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>-->
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <div id="mainselection">
+        <select name="wellsList" id="wellsList" onchange="wellSelected()"></select>
+    </div>
+
+    <ul class="tabs">
+        <li><a href="#tab1" class="btn btn-primary"><span class="glyphicon glyphicon-home" aria-hidden="true"></span><span style="padding-left:4px;">Well Info</span></a></li>
+        <li><a href="#stageTabContainer" class="btn btn-default"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span><span style="padding-left:4px;">Main Charts</span></a></li>
+        <li><a href="#stagePerformanceContainer" class="btn btn-default"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span><span style="padding-left:4px;">Goal Tracking</span></a></li>
+    </ul>
+    <div id="tab1" class="tab_content">
+        <p>test</p>
+    </div>
+
+    <div id="stageTabContainer" class="tab_content">
+        <ul class="tabs">
+            <li><a href="#stage1" class="btn btn-primary" id="stage1Tab">Stage 1</a></li>
+            <!-- Add tabs here -->
+            <!--
+            <li><a href="#tab2-2">Tab2-2</a></li>
+                -->
+        </ul>
+
+        <div id="stage1">
+            <div id="stageChart1Top" style="height: 300px; width:900px;"></div>
+            <div id="stageChart1Bottom" style="height: 300px; width:900px;"></div>
+        </div>
+        <!--
+        <div id="tab2-2">
+            <p>test 2</p>
+        </div>
+            -->
+    </div>
+
+    <div id="stagePerformanceContainer" class="tab_content">
+        <ul class="tabs">
+            <li><a href="#perfStage1" class="btn btn-primary" id="perfStage1Tab">Stage 1</a></li>
+        </ul>
+
+        <div id="perfStage1">
+            <table>
+                <tr>
+                    <td rowspan="2"><div id="costStage1" style="height: 300px; width:600px;"/></td>
+                    <td><div id="perfStageChart1Top" style="height: 300px; width:600px;"></div></td>
+                </tr>
+                <tr><td><div id="perfStageChart1Bottom" style="height: 300px; width:600px;"></div></td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="PressureOverlay" class="notVisible" style="z-index: 10000;background-color:rgba(255,255,255,0.1);">
+        <div style="font-family:'Arial Black'; font-size: 128px;">88</div>
+        <div style="color: #b44; font-family:'Arial Black'; font-size: 32px; letter-spacing: .21em; margin-top:50px; margin-left:5px;">zombie</div>
+    </div>
+
+    <!--
+    <div data-role="tabs" id="tabs">
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#one" data-ajax="false">Well Info</a></li>
+                <li><a href="#two" data-ajax="false">Drilling Tracker</a></li>
+                <li><a href="#three" data-ajax="false">Tracking Goals</a></li>
+            </ul>
+        </div>
+
+        <div id="one" class="ui-body-d ui-content">
+            <h1>First tab contents</h1>
+        </div>
+        <div id="two">
+
+            <div data-role="navbar">
+                <ul id="chartTabs">
+                    <li><a href="#stage1" data-ajax="false">Stage 1</a></li>
+                    <li><a href="#stage2" data-ajax="false">Stage 2</a></li>
+                </ul>
+            </div>
+
+            <div id="stage1" class="ui-body-d ui-content">
+                <div id="chartContainer1" style="height: 370px; width:100%;"></div>
+            </div>
+
+            <div id="stage2" class="ui-body-d ui-content">
+                <div id="chartContainer2" style="height: 370px; width:100%;"></div>
+            </div>
+        </div>
+
+        <div id="three">
+        </div>
+    </div>
+    -->
+
+    <script>
+        /*
+        jQuery('ul.tabs').each(function () {
+            // For each set of tabs, we want to keep track of
+            // which tab is active and it's associated content
+            var $active, $content, $links = jQuery(this).find('a');
+
+            // If the location.hash matches one of the links, use that as the active tab.
+            // If no match is found, use the first link as the initial active tab.
+            $active = jQuery($links.filter('[href="' + location.hash + '"]')[0] || $links[0]);
+            $active.addClass('active');
+
+            $content = $($active[0].hash);
+
+            // Hide the remaining content
+            $links.not($active).each(function () {
+                jQuery(this.hash).hide();
+            });
+
+            // Bind the click event handler
+            jQuery(this).on('click', 'a', function (e) {
+                // Make the old tab inactive.
+                $active.removeClass('active');
+                $content.hide();
+
+                // Update the variables with the new link and content
+                $active = jQuery(this);
+                $content = jQuery(this.hash);
+
+                // Make the tab active.
+                $active.addClass('active');
+                $content.show();
+
+                // Prevent the anchor's default click action
+                e.preventDefault();
+            });
+        });
+        */
+        google.charts.load('current', { 'packages': ['corechart', 'line', 'gauge', 'bar'] });
+        //google.charts.load('current', { 'packages': ['line'] });
+
+        console.log("SlurryRate[0] = " + currentScenario.SlurryRate[0]);
+        console.log("PropConcentration[1] = " + currentScenario.PropConcentration[0]);
+
+        loadTabs();
+        loadWellsList();
+        //addStageChartTab(1);
+        //addStageChartTab(2);
+        //addStageChartTab(3);
+    </script>
+</body>
+</html>
