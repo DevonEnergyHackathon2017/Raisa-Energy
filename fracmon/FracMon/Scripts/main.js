@@ -1,6 +1,6 @@
 ﻿var wellsList = null;  // List of WellDTO
 var currentWell = null; // ID of the current selected well
-var currentPoint = null; // ID of the current data point
+var currentPoint = 0; // ID of the current data point
 var currentStage = null; // Current Stage #
 var stagesList = null; // list of stages for the current well
 
@@ -35,9 +35,11 @@ function selectWell(wellId) {
     currentWell = wellId;
     stagesList = ajaxCall("GET", null, "/wells/" + currentWell +"/stages");
     console.log(stagesList);
+    currentStage = 1;
+    addStreamChartTab(currentStage);
 
+    /*
     currentPoint = 0;
-
     var dps = []; // dataPoints
     var chart = new CanvasJS.Chart("stageChart1", {
         title: {
@@ -98,11 +100,6 @@ function selectWell(wellId) {
                 y: currentWellPoint.Pressure
             });
 
-            /*
-            if (dps.length > dataLength) {
-                dps.shift();
-            }
-            */
             chart.render();
         }
 
@@ -113,5 +110,5 @@ function selectWell(wellId) {
 
     updateChartFromServer();
     intervalId = setInterval(function () { updateChartFromServer() }, updateInterval);
-
+    */
 }

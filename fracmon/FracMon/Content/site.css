@@ -1,4 +1,51 @@
-﻿.tab_content { background:#fff;padding:10px;width:100% }
-.tabs li { display:inline;list-style:none }
-.tabs a { background:#7c7c7c;color:#dadada;display:inline-block }
-.tabs a.active { background:#e32d2d;color:#fff }
+﻿.tab_content {
+    background: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 100%;
+}
+
+.tabs li {
+    display: inline;
+    list-style: none;
+}
+
+.ui-link {
+}
+
+.tabs a {
+    /*
+    background: #7c7c7c;
+    color: #dadada;
+    display: inline-block;
+    text-decoration: none;
+        */
+}
+
+    .tabs a.active {
+        /*
+        background: #e32d2d;
+        color: #fff;
+            */
+    }
+
+div {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.overlay {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: 60px; /* chartArea top  */
+    left: 180px; /* chartArea left */
+}
+
+.notVisible {
+    display: none;
+}
+
+.visible {
+    display: block;
+}

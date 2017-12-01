@@ -2,50 +2,83 @@
 <html>
 <head>
     <title></title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Content/bootstrap.min.css" />
+    <!--
     <link rel="stylesheet" href="Content/jquery.mobile-1.4.5.min.css" />
+        -->
     <link rel="stylesheet" href="Content/site.css" />
     <script src="Scripts/jquery-2.2.4.min.js"></script>
+    <script>
+        $(document).on("mobileinit", function () {
+            $.mobile.keepNative = "select";
+        });
+    </script>
     <script src="Scripts/jquery.mobile-1.4.5.min.js"></script>
     <script src="Scripts/communication.js"></script>
+    <script src="Scripts/overlays.js"></script>
+    <script src="Scripts/scenarios.js"></script>
+    <script src="Scripts/chart.js"></script>
     <script src="Scripts/main.js"></script>
     <script src="Scripts/tabs.js"></script>
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <!--<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>-->
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
-    <div id="wellsListContainer" class="ui-field-contain">
-        <label for="wellsList">Wells</label>
-        <select name="wellsList" id="wellsList" onchange="wellSelected()">
-
-        </select>
+    <div id="mainselection">
+        <select name="wellsList" id="wellsList" onchange="wellSelected()"></select>
     </div>
 
     <ul class="tabs">
-        <li><a href="#tab1">Podcasts</a></li>
-        <li><a href="#tab2">Videos</a></li>
+        <li><a href="#tab1" class="btn btn-primary"><span class="glyphicon glyphicon-home" aria-hidden="true"></span><span style="padding-left:4px;">Well Info</span></a></li>
+        <li><a href="#stageTabContainer" class="btn btn-default"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span><span style="padding-left:4px;">Main Charts</span></a></li>
+        <li><a href="#stagePerformanceContainer" class="btn btn-default"><span class="glyphicon glyphicon-usd" aria-hidden="true"></span><span style="padding-left:4px;">Goal Tracking</span></a></li>
     </ul>
     <div id="tab1" class="tab_content">
         <p>test</p>
     </div>
 
-    <div class="tab_content" id="stageTabContainer">
+    <div id="stageTabContainer" class="tab_content">
         <ul class="tabs">
-            <li><a href="#stage1">Stage 1</a></li>
+            <li><a href="#stage1" class="btn btn-primary" id="stage1Tab">Stage 1</a></li>
             <!-- Add tabs here -->
             <!--
             <li><a href="#tab2-2">Tab2-2</a></li>
                 -->
         </ul>
-        
+
         <div id="stage1">
-            <div id="stageChart1" style="height: 370px; width:100%;"></div>
+            <div id="stageChart1Top" style="height: 300px; width:900px;"></div>
+            <div id="stageChart1Bottom" style="height: 300px; width:900px;"></div>
         </div>
         <!--
         <div id="tab2-2">
             <p>test 2</p>
         </div>
             -->
+    </div>
+
+    <div id="stagePerformanceContainer" class="tab_content">
+        <ul class="tabs">
+            <li><a href="#perfStage1" class="btn btn-primary" id="perfStage1Tab">Stage 1</a></li>
+        </ul>
+
+        <div id="perfStage1">
+            <table>
+                <tr>
+                    <td rowspan="2"><div id="costStage1" style="height: 300px; width:300px;"/></td>
+                    <td><div id="perfStageChart1Top" style="height: 300px; width:600px;"></div></td>
+                </tr>
+                <tr><td><div id="perfStageChart1Bottom" style="height: 300px; width:600px;"></div></td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div id="PressureOverlay" class="notVisible" style="z-index: 10000;background-color:rgba(255,255,255,0.1);">
+        <div style="font-family:'Arial Black'; font-size: 128px;">88</div>
+        <div style="color: #b44; font-family:'Arial Black'; font-size: 32px; letter-spacing: .21em; margin-top:50px; margin-left:5px;">zombie</div>
     </div>
 
     <!--
@@ -62,7 +95,7 @@
             <h1>First tab contents</h1>
         </div>
         <div id="two">
-            
+
             <div data-role="navbar">
                 <ul id="chartTabs">
                     <li><a href="#stage1" data-ajax="false">Stage 1</a></li>
@@ -122,6 +155,12 @@
             });
         });
         */
+        google.charts.load('current', { 'packages': ['corechart', 'line', 'gauge'] });
+        //google.charts.load('current', { 'packages': ['line'] });
+
+        console.log("SlurryRate[0] = " + currentScenario.SlurryRate[0]);
+        console.log("PropConcentration[1] = " + currentScenario.PropConcentration[0]);
+
         loadTabs();
         loadWellsList();
         //addStageChartTab(1);
